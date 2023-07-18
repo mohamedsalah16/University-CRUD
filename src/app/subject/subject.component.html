@@ -1,0 +1,56 @@
+<div class = "d-flex justify-content-between mb-3">
+  <h2>Subjects List</h2>
+  <button (click) = "addsubject()" class = "btn btn-success" style="margin-left: 10px"> Add Subject</button>
+</div>
+
+
+<div >
+    
+</div>
+
+<!-- 
+<div>
+    {{isAddDialogOpen}}
+    {{isEditDialogOpen}}
+</div> -->
+
+<table class = "table table-striped table-bordered">
+  <thead>
+      <tr>
+          <th>ID</th>
+          <th>Subject Name</th>
+        
+          <th>Actions</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor = "let subject of subjects" >
+          <td> {{ subject.id }} </td>
+          <td> {{ subject.name }} </td>
+        
+          <td>
+              <button (click) = "updatesubject()" class = "btn btn-sm btn-warning">Update</button>
+              <button class = "btn btn-sm btn-danger" (click)="deletesubjectById(subject.id)"  style="margin-left: 10px"> Delete</button>
+          </td>
+          <td>
+            <div [hidden]="updateDiv">
+              <div class="input-group mb-3" >
+                  <input type="text" class="form-control" placeholder="Enter subject Name" #SubjectName2 style="flex: 0.5;" aria-label="Enter subject Name" aria-describedby="basic-addon2">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" (click)="updatesubjectById(SubjectName2.value,subject.id)" >Button</button>
+                  </div>
+                </div>
+                </div>
+          </td>
+      </tr>
+  </tbody>
+</table>
+
+<div [hidden]="addDiv">
+    <div class="input-group mb-3" >
+        <input type="text" class="form-control" placeholder="Enter subject Name" #SubjectName style="flex: 0.5;" aria-label="Enter subject Name" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button" (click)="addNewsubject(SubjectName.value)" >Button</button>
+        </div>
+      </div>
+</div>

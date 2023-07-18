@@ -1,0 +1,51 @@
+<div class = "d-flex justify-content-between mb-3">
+  <h2>Students List</h2>
+  <button (click) = "showAddForm()" class = "btn btn-primary" style="margin-left: 10px">Add Student</button>
+</div>
+
+<form *ngIf="isAddFormOpen" class = "d-flex justify-content-between mb-3">
+        <input type="text" class="form-control me-2" placeholder="First Name" #firstName style="flex: 0.5;" aria-label="First Name" aria-describedby="basic-addon2">
+        <input type="text" class="form-control me-2" placeholder="Middle Name" #middleName style="flex: 0.5;" aria-label="Middle Name" aria-describedby="basic-addon2">
+        <input type="text" class="form-control me-2" placeholder="Last Name" #lastName style="flex: 0.5;" aria-label="Last Name" aria-describedby="basic-addon2">
+        <input type="text" class="form-control me-2" placeholder="Comma Seperated Subject IDs" #subjects style="flex: 0.5;" aria-label="Subjects" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+          <button class="btn btn-success me-2" type="button" (click)="addNewStudent(firstName.value, middleName.value, lastName.value, subjects.value)">Add Student</button>
+          <button class="btn btn-outline-danger" type="button" (click)="hideAddForm()" >Hide</button>
+        </div>
+</form>
+
+<form *ngIf="isEditFormOpen" class = "d-flex justify-content-between mb-3">
+    <input type="text" class="form-control me-2" placeholder="First Name" #firstName style="flex: 0.5;" aria-label="First Name" aria-describedby="basic-addon2">
+    <input type="text" class="form-control me-2" placeholder="Middle Name" #middleName style="flex: 0.5;" aria-label="Middle Name" aria-describedby="basic-addon2">
+    <input type="text" class="form-control me-2" placeholder="Last Name" #lastName style="flex: 0.5;" aria-label="Last Name" aria-describedby="basic-addon2">
+    <input type="text" class="form-control me-2" placeholder="Comma Seperated Subject IDs" #subjects style="flex: 0.5;" aria-label="Subjects" aria-describedby="basic-addon2">
+    <div class="input-group-append">
+      <button class="btn btn-success me-2" type="button" (click)="updateStudentById(studentToEdit?.id, firstName.value, middleName.value, lastName.value, subjects.value)">Update Student</button>
+      <button class="btn btn-outline-danger" type="button" (click)="hideEditForm()" >Hide</button>
+    </div>
+</form>
+
+<table class = "table table-striped table-bordered">
+  <thead>
+      <tr>
+          <th>Name</th>
+          <th>Middle Name</th>
+          <th>Last Name</th>
+          <th>Subjects</th>
+          <th>Actions</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor = "let student of students" >
+          <td> {{ student.fristName }} </td>
+          <td> {{ student.middleName }} </td>
+          <td> {{ student.lastName }} </td>
+          <td> {{ student.subjectNames.toString() }} </td>
+        
+          <td>
+              <button  class = "btn btn-sm btn-warning me-2" (click)="showEditForm(student)">Update</button>
+              <button  class = "btn btn-sm btn-danger"(click)="deleteStudentById(student.id)">Delete</button>
+          </td>
+      </tr>
+  </tbody>
+</table>
